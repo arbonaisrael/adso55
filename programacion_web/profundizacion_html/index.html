@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Primer documento</title>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+
+    <link rel="icon" href="images/ico_sena.png" type="image/png" />
+</head>
+
+<body>
+    <h1>ADSO 55</h1>
+    <p> Programación web </p>
+
+    <a href="index.html" class="badge badge-primary">Inicio</a>
+    <a href="quienes_somos.html" class="badge badge-primary">Quiénes somos? </a>
+    <a href="contacto.html" class="badge badge-primary" target="_blank">Contacto</a>
+
+    <a href="boos.html" class="badge badge-primary" target="_blank">Bootstrap</a>
+
+    <a href="ejemplo_b.html" class="badge badge-primary" target="_blank">Bootstrap Ejemplo</a>
+
+    <table>
+        <caption>Contactos de la tienda por áreas</caption>
+        <tr>
+            <th>Áreas de la tienda</th>
+            <th>Contacto</th>
+            <th>Teléfono</th>
+        </tr>
+        <tr>
+            <td>Calzado Hombre</td>
+            <td>Estudiante 1</td>
+            <td>300 000 00 </td>
+        </tr>
+        <tr>
+            <td>Zapatillas para Hombre</td>
+            <td>Estudiante 2</td>
+            <td>300 000 01 </td>
+        </tr>
+        <tr>
+            <td>Calzado para dama</td>
+            <td>Estudiante 3</td>
+            <td>300 000 02 </td>
+        </tr>
+        <tr>
+            <td>Deportivos para niño</td>
+            <td>Estudiante 4</td>
+            <td>300 000 03 </td>
+        </tr>
+    </table>
+
+
+    <div class="card" style="width: 18rem;">
+        <img src="images/ico_sena.png" class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title">Nike Running rojos</h5>
+          <p class="card-text">$154.999</p>
+          <a href="#" class="btn btn-primary">Adicionar al carro</a>
+        </div>
+      </div>
+
+
+    <form action="action_page.php" method="get">
+        <label for="nombreCompleto">Nombre completo</label>
+        <input type="text" id="nombreC" name="nombreC" placeholder="Nombres y  apellidos" required><br><br>
+        <label for="zapatoB">Zapato que no encontraste:</label>
+        <input type="text" id="zapatoab" name="zapatoab"><br><br>
+        <input type="radio" id="zapatoh" name="tzapato" value="hombre">
+        <label for="male">Hombre</label><br>
+        <input type="radio" id="zapatom" name="tzapato" value="mujer">
+        <label for="female">Mujer</label><br>
+        <input type="radio" id="zapaton" name="tzapato" value="nino">
+        <label for="other">Niño</label><br><br>
+        <input type="submit" value="Solicitar">
+    </form>
+
+    <footer>
+        <p>Autores:Desarrolladores</p>
+        <p><a href="mailto:hege@example.com">hege@example.com</a></p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js"></script>
+
+</body>
+
+</html>

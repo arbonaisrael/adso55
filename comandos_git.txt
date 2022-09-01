@@ -1,0 +1,43 @@
+// configuraciones globales de git
+
+git config --global --list
+
+// modificación de credenciales
+
+git config --global user.name "arbonaisrael"
+git config --global user.password "la_contraseña_de_github"
+git config --global user.email "israelarbona1988@gmail.com"
+
+// eliminar contraseña actual
+git config --global --unset user.password
+
+// añadir contraseña nueva
+git config --global --add user.password "la_contraseña_nueva"
+
+
+
+
+// Cargar proyecto a github
+// iniciar git 'control de versión' solo se realiza una vez
+git init 
+
+// cargar todos los archivos para push
+git add . 
+
+// generar comentario del push del proyectos a subit
+git commit -m 'Inicio de proyectos'
+
+git remote add origin https://el_token_personal@github.com/arbonaisrael/adso55.git
+
+git push -u origin master
+
+
+// clonar proyecto publico se realiza una sola vez
+
+git clone https://github.com/arbonaisrael/adso55.git
+
+// actulizar el proyecto clonado
+git pull origin master
+
+
+
