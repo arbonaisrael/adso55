@@ -38,7 +38,7 @@
 
             $usuario = $_POST['datos'];
             $pdo = ConexionBD::obtenerInstancia()->obtenerBD();
-            $sql = "SELECT u.usuario, u,clave " .
+            $sql = "SELECT u.usuario as usuario, u.clave as clave, u.rol as rol, u.estado as estado " .
                    "FROM usuarios as u " . 
                    "WHERE u.usuario = '" . $usuario['username'] .
                    "' AND u.clave = '" . $usuario['clave'] . "' AND u.estado = 1;";

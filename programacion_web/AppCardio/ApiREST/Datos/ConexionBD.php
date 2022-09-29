@@ -35,7 +35,7 @@
          * en la constante de conexion
          * @return PDO objeto PDO
          */
-        public static function obtenerInstacia() {
+        public static function obtenerInstancia() {
             if (self::$db == null) {
                 self::$db = new self();
             }
@@ -54,7 +54,7 @@
                 );
 
                 // Habilitamos excepciones
-                self::$pdo->setAttibute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                self::$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             }
 
             return self::$pdo;
