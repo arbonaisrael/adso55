@@ -1,7 +1,7 @@
-if (sessionStorage.getItem('user') != null){
-    var usuarioActual = jQuery.parseJSON(sessionStorage.getItem('user'));
-    if (usuarioActual[0].rol> 1){
-        console.log('Inicio usuario');
+if(sessionStorage.getItem('user') != null){
+    var UsuarioActual = jQuery.parseJSON(sessionStorage.getItem('user'));
+    if (UsuarioActual[0].rol > 1){
+        $('#contenido').load('pag/menuusuario.html'); 
     } else {
         $('#contenido').load('pag/menu.html');
     }
@@ -9,6 +9,6 @@ if (sessionStorage.getItem('user') != null){
     $('#contenido').load('pag/login.html');
 }
 
-function Recargar(url) {
+function Recargar(url){
     location.href = url;
 }
