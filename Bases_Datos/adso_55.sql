@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50505
 File Encoding         : 65001
 
-Date: 2022-10-27 10:02:59
+Date: 2022-11-03 12:02:21
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -5242,6 +5242,49 @@ INSERT INTO `dptos` VALUES ('97', 'VAUPES', '1');
 INSERT INTO `dptos` VALUES ('99', 'VICHADA', '1');
 
 -- ----------------------------
+-- Table structure for `facturas`
+-- ----------------------------
+DROP TABLE IF EXISTS `facturas`;
+CREATE TABLE `facturas` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `factura_cod` varchar(30) DEFAULT NULL,
+  `cliente` int(11) DEFAULT NULL,
+  `fecha_fac` date DEFAULT NULL,
+  `estado` smallint(6) DEFAULT NULL,
+  `total` decimal(18,2) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
+
+-- ----------------------------
+-- Records of facturas
+-- ----------------------------
+INSERT INTO `facturas` VALUES ('2', 'FAV01', '1100', '2022-11-02', '0', '200000.00');
+
+-- ----------------------------
+-- Table structure for `factura_dets`
+-- ----------------------------
+DROP TABLE IF EXISTS `factura_dets`;
+CREATE TABLE `factura_dets` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `factura_id` int(11) NOT NULL,
+  `producto_id` int(11) NOT NULL,
+  `cantidad` int(11) DEFAULT NULL,
+  `precio` decimal(18,2) DEFAULT NULL,
+  `iva` decimal(5,2) DEFAULT NULL,
+  `total` decimal(18,2) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `factura_id` (`factura_id`),
+  KEY `producto_id` (`producto_id`),
+  CONSTRAINT `factura_dets_ibfk_1` FOREIGN KEY (`factura_id`) REFERENCES `facturas` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `factura_dets_ibfk_2` FOREIGN KEY (`producto_id`) REFERENCES `productos` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4;
+
+-- ----------------------------
+-- Records of factura_dets
+-- ----------------------------
+INSERT INTO `factura_dets` VALUES ('7', '2', '1', '10', '20000.00', '0.00', '200000.00');
+
+-- ----------------------------
 -- Table structure for `paises`
 -- ----------------------------
 DROP TABLE IF EXISTS `paises`;
@@ -5260,6 +5303,25 @@ INSERT INTO `paises` VALUES ('2', 'VENEZUELA', 'VE');
 INSERT INTO `paises` VALUES ('3', 'PERU', 'PE');
 INSERT INTO `paises` VALUES ('4', 'ESTADOS UNIDOS', 'US');
 INSERT INTO `paises` VALUES ('5', 'PANAMA', 'PA');
+
+-- ----------------------------
+-- Table structure for `productos`
+-- ----------------------------
+DROP TABLE IF EXISTS `productos`;
+CREATE TABLE `productos` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `cod_producto` varchar(30) NOT NULL,
+  `nombre` varchar(100) DEFAULT NULL,
+  `cantidad` int(11) DEFAULT NULL,
+  `val_unidad` decimal(18,2) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
+
+-- ----------------------------
+-- Records of productos
+-- ----------------------------
+INSERT INTO `productos` VALUES ('1', 'COD_01', 'COLOR PRISMA', '200', '20000.00');
+INSERT INTO `productos` VALUES ('2', 'COD_02', 'MARCADORES', '100', '7000.00');
 
 -- ----------------------------
 -- Table structure for `pr_tabla`
@@ -7412,6 +7474,93 @@ BEGIN
 
 	SELECT 'Finalizo el ingreso de los 2000 mil registros';
 
+
+END
+;;
+DELIMITER ;
+
+-- ----------------------------
+-- Procedure structure for `prRepeat`
+-- ----------------------------
+DROP PROCEDURE IF EXISTS `prRepeat`;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `prRepeat`()
+BEGIN
+	SET @miVariable = 0;
+	
+	REPEAT
+		SET @miVariable = @miVariable + 1;
+	UNTIL @miVariable >10001 END REPEAT;
+	
+END
+;;
+DELIMITER ;
+
+-- ----------------------------
+-- Procedure structure for `prTemporal`
+-- ----------------------------
+DROP PROCEDURE IF EXISTS `prTemporal`;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `prTemporal`()
+BEGIN
+	# Manejo de tabla temporal
+
+	DECLARE done INT DEFAULT FALSE;
+	
+	DECLARE contador INTEGER DEFAULT 1;
+	DECLARE tnombre VARCHAR(100) DEFAULT '';
+
+	DECLARE cursor_prtabla CURSOR FOR SELECT COALESCE(t.nombre,'') from pr_tabla as t;
+	DECLARE CONTINUE HANDLER FOR NOT FOUND SET done = TRUE;
+
+	-- Tabla temporal
+	DROP TEMPORARY TABLE IF EXISTS pr_temporal;
+
+	CREATE TEMPORARY TABLE pr_temporal (
+		tem_nombre VARCHAR(100),
+		tem_inc INTEGER
+	);
+
+	OPEN cursor_prtabla;
+	looppro : LOOP	
+		
+		FETCH cursor_prtabla into tnombre;
+		
+		INSERT pr_temporal VALUES (tnombre,contador);
+		SET contador = contador + 2;
+
+		IF done THEN
+			LEAVE looppro;
+		END IF;
+
+	END LOOP looppro;
+	CLOSE cursor_prtabla;
+
+
+	SELECT tem_nombre, tem_inc FROM pr_temporal;
+
+END
+;;
+DELIMITER ;
+
+-- ----------------------------
+-- Procedure structure for `prWhile`
+-- ----------------------------
+DROP PROCEDURE IF EXISTS `prWhile`;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `prWhile`()
+BEGIN
+	#Routine body goes here...
+
+	DECLARE contar INT DEFAULT 1;
+	DECLARE resultado VARCHAR(3000) DEFAULT '';
+
+	WHILE (contar < 1000) DO
+		SET resultado = CONCAT(resultado,contar,' - ');
+		SET contar = contar + 1;
+	END WHILE;
+
+	SELECT resultado;
 
 END
 ;;
