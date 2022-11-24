@@ -1,5 +1,50 @@
 <resources>
     <string name="app_name">adso55_lite</string>
 
+    <!-- String de la actividad main -->
+    <string name="txtBien">Bienvenidos</string>
+
+    <!-- String de la actividad login -->
+
+    <string name="txtlogin">Inicio Sesión</string>
+    <string name="txtusuario">Usuario</string>
+    <string name="elogin">Ingrese usuario</string>
+    <string name="txtclave">Contraseña</string>
+    <string name="eclave">Ingrese Contraseña</string>
+    <string name="blogin">Iniciar</string>
+
+
+    <!-- String de la actividad registro usuario -->
+
+    <string name="txtregistro">Registro Usuario</string>
+    <string name="reusuario">Digite Usuario</string>
+
+    <string name="recontrasena">Digite Contraseña</string>
+    <string name="recontrasenav">Verificar Contraseña</string>
+    <string name="refeccreacion">Digite Fecha Creación</string>
+
+    <string-array name="rs_estado">
+        <item>
+            Sin estado
+        </item>
+        <item>
+            Activo
+        </item>
+        <item>
+            Inactivo
+        </item>
+    </string-array>
+
+    <string-array name="rs_rol">
+        <item>
+            Sin rol
+        </item>
+        <item>
+            Administrador
+        </item>
+        <item>
+            Usuario
+        </item>
+    </string-array>
 
 </resources>
